@@ -22,6 +22,12 @@ function handleSend(text) {
   const [isTyping, setIsTyping] = useState(false);
 }
 
+function handleReact(id) {
+  const updated = messages[activeId].map((m) =>
+  m.id === id ? { ...m, hearts: m.hearts + 1 } : m);
+  setMessages({...messages, [activeId]: updated });
+}
+
 
 
 
