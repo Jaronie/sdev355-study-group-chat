@@ -18,6 +18,8 @@ const channel = CHANNELS.find((c) => c.id === activeId);
 function handleSend(text) {
   const message = { id: crypto.randomUUID(), author: "You", time: now(), hearts: 0, text };
   setMessages({ ...messages, [activeId]: [...messages[activeId], message] });
+
+  const [isTyping, setIsTyping] = useState(false);
 }
 
 
