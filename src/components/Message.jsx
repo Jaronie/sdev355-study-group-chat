@@ -2,11 +2,17 @@ import { useState } from "react";
 
 export default function Message({ message, onReact}) {
   const [showTime, setShowTime] = useState(false);
-  const [isHovered, setIsHovered] = useState(false;
+  const [isHovered, setIsHovered] = useState(false);
+  const [isPinned, setIsPinned] = useState(false);
+
+  function handlePinClick(e) {
+    e.stopPropagation();
+    onPin(message.id);
+  }
 
     return (
       <li
-      className="message"
+      className={isPinned ? "message pinned" : "message"}
       onClick={() => setShowTime(!showTime)}
       onDoubleClick={() => onReact(message.id)}
       onMouseEnter={() => setIsHovered(true)}
@@ -18,7 +24,9 @@ export default function Message({ message, onReact}) {
         {message.hearts > 0 && <span className="hearts">{message.hearts}</span>}
         {isHovered && (
           <div className="toolbar">
-            <button onClick={() => console.log("pin", message.id)}>Pin</button>
+            <button onClick={() => setIsPinned(!isPinned)}>
+              {isPinned ? "Unpin" : "Pin"}
+              </button>
           </div>
         )}
       </li>
